@@ -1,6 +1,12 @@
-
+#[[LC_NOTICE_BEGIN
+LC_NOTICE_END]]
 
 cmake_minimum_required(VERSION 3.20)
+
+
+################################
+#          PROJECT
+################################
 
 project(
 	LC_base_classes
@@ -9,25 +15,39 @@ project(
 	LANGUAGES CXX
 )
 
-include(CTest)
+################################
+#          LIBRARY
+################################
 
+# This is an header only library, so we declate it as INTERFACE
 add_library(LC_base_classes INTERFACE)
 
-#target_include_directories(LC_base_classes INTERFACE "lib/include")
 target_include_directories(
 	LC_base_classes
 	INTERFACE
-		#$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+		
+		# probably useless since this library is not build (INTERFACE)
 		$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib/include>
-		#$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
+
+		# once installed, users will use this path to include this library
 		$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include/LC_base_classes>
 )
+
+################################
+#         INSTALLATION
+################################
 
 # see https://cliutils.gitlab.io/modern-cmake/chapters/install/installing.html
 
 install(
-	TARGETS LC_base_classes
-	EXPORT LC_base_classesTargets
+	TARGETS
+		# targets we are exporting
+		LC_base_classes
+	EXPORT
+		# the export group
+		LC_base_classesTargets
+
+	# TODO what are these? are they necessary for this library?
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
 	RUNTIME DESTINATION bin
@@ -36,15 +56,27 @@ install(
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-    LC_base_classesConfigVersion.cmake
+    LC_base_classesConfigVersion.cmake # TODO this is not used?!?! maybe we have to install() it????
     VERSION ${PACKAGE_VERSION}
     COMPATIBILITY AnyNewerVersion
     )
 
-install(EXPORT LC_base_classesTargets
-	FILE LC_base_classesTargets.cmake
-	NAMESPACE LC::
-	DESTINATION lib/cmake/LC_base_classes
+
+install(
+	EXPORT
+		# the export group
+		LC_base_classesTargets
+	FILE
+		# the file we are exporting the group to
+		LC_base_classesTargets.cmake
+	NAMESPACE
+		# the namespace we are exporting the group to,
+		# targets will be installed in this namespace,
+		# users will find the library as "LC::LC_base_classes"
+		LC::
+	DESTINATION
+		# the destination of the file, relative to the install prefix
+		lib/cmake/LC_base_classes
 )
 
 configure_file(
@@ -52,6 +84,7 @@ configure_file(
 	LC_base_classesConfig.cmake
 	@ONLY
 )
+
 install(
 	FILES
 		"${CMAKE_CURRENT_BINARY_DIR}/LC_base_classesConfig.cmake"
@@ -61,7 +94,12 @@ install(
 
 install(
 	DIRECTORY "${PROJECT_SOURCE_DIR}/lib/include/"
-	DESTINATION "include/LC_base_classes"
+	DESTINATION "include/LC_base_classes" # see the above "target_include_directories" call
 )
+
+
+################################
+#          TESTING
+################################
 
 add_subdirectory(tests)
