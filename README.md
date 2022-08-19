@@ -63,6 +63,18 @@ for (auto& e : v)
 }
 ```
 
+This teckique can be used to replace `void*` pointer as "user data" storage method, for example consider:
+```cpp
+void set_callback_for_some_stuff(void (*fcn)(void* pData), void* pData);
+```
+in this specific case, we could replace the params with a simple `std::function`, but if we want to mantain this pattern, we could do:
+```cpp
+using lc::Polymorphic;
+using PData = std::shared_ptr<Polymorphic>;
+void set_callback_for_some_stuff(void (*fcn)(PData pData), PData);
+```
+in this way, we can perform runtime checks of <var>pData</var> validity.
+
 ### concepts:
 The following concepts are defined:
 - `lc::lc_polymorphic<T>` to test if the class is derived from `lc::Polymorphic`
