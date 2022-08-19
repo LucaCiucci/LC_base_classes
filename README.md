@@ -8,7 +8,7 @@ This is an header only library defining some basic classes that might be of very
 
 ## `lc::Polymorphic`
 
-This can be used as base class for your own classes that requires polymorphism, this ensure your class is polymorphic. For example, comsider this class:
+This can be used as base class for your own classes that requires polymorphism, this ensure your class is polymorphic. For example, consider this class:
 ```cpp
 class SomeClass {
 public:
