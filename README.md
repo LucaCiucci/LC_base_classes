@@ -34,7 +34,7 @@ class SomeClass : LCPolymorphic {};
 class SomeClass : public virtual ::lc::Polymorphic {};
 ```
 This will ensure that the class is polymorphic and that it has a virtual destructor.  
-Note that the `LCPolymorphic` macro defines the `lc::Polymorphic` inheritance "virtual", see [virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance) for a simple explanation (see also [this](https://isocpp.org/wiki/faq/multiple-inheritance) and [this](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)).
+Note that the `LCPolymorphic` macro defines the `lc::Polymorphic` inheritance as "virtual", see [virtual inheritance](https://en.wikipedia.org/wiki/Virtual_inheritance) for a simple explanation (see also [this](https://isocpp.org/wiki/faq/multiple-inheritance) and [this](https://en.cppreference.com/w/cpp/language/derived_class#Virtual_base_classes)).
 
 This patter may have some other usage, for example, you could use `lc::Polymorphic` to store pointers to very different objects, for example:
 ```cpp
@@ -63,7 +63,7 @@ for (auto& e : v)
 }
 ```
 
-This teckique can be used to replace `void*` pointer as "user data" storage method, for example consider:
+This technique can be used to replace `void*` pointer as "user data" storage method, for example consider:
 ```cpp
 void set_callback_for_some_stuff(void (*fcn)(void* pData), void* pData);
 ```
@@ -140,6 +140,3 @@ void draw()
 }
 ```
 this removes the necessity of explicitly calling `end_draw()` everywere.
-
-# TODOs:
-- add code coverage, read [this qt introduction](https://www.qt.io/safety-critical-certification-with-code-coverage?utm_term=code%20coverage&utm_campaign=Safety&utm_source=adwords&utm_medium=ppc&hsa_acc=7519109677&hsa_net=adwords&hsa_cam=16050439320&hsa_ad=583575428080&hsa_kw=code%20coverage&hsa_grp=131526851414&hsa_mt=p&hsa_ver=3&hsa_src=g&hsa_tgt=aud-302905243335:kwd-308034577093&gclid=CjwKCAjw6fyXBhBgEiwAhhiZsmYF__1j11O_neoQwnFifrWM_Uob78kkIa-zbFmw7ODE6HxWuaQcwBoC6kEQAvD_BwE), see also [this issue](https://github.com/microsoft/vstest-docs/issues/189) -> [this vs doc page](https://docs.microsoft.com/de-de/previous-versions/visualstudio/visual-studio-2017/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2017#diagnostic-data-adapters-data-collectors)
