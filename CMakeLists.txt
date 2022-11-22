@@ -10,7 +10,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
 	LC_base_classes
-	VERSION 0.0.0
+	VERSION 0.1.0
 	DESCRIPTION "provides soma very basic classes such as `NonCopiable`, `Abstract` etc."
 	LANGUAGES CXX
 )
