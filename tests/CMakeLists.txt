@@ -22,6 +22,7 @@ target_sources(
 
 # https://github.com/catchorg/Catch2/blob/devel/docs/cmake-integration.md#top
 find_package(Catch2 3 REQUIRED)
+# Note: Catch2WithMain will provide us a default main
 target_link_libraries(unit_test PRIVATE Catch2::Catch2WithMain)
 
 add_test(NAME UnitTest COMMAND unit_test)
