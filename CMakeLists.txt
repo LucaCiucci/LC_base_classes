@@ -15,6 +15,11 @@ project(
 	LANGUAGES CXX
 )
 
+set(LC_base_classes_MAIN_PROJECT FALSE)
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+	set(LC_base_classes_MAIN_PROJECT TRUE)
+endif()
+
 ################################
 #          LIBRARY
 ################################
@@ -102,4 +107,7 @@ install(
 #          TESTING
 ################################
 
-add_subdirectory(tests)
+if (LC_base_classes_MAIN_PROJECT)
+	# ??? copilot-> enable_testing()
+	add_subdirectory(tests)
+endif()
