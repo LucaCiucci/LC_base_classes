@@ -3,7 +3,7 @@ LC_NOTICE_END*/
 
 #pragma once
 
-#if __has_include(<concepts>)
+#if __cpp_concepts
 	#include <concepts>
 #endif
 
@@ -47,7 +47,7 @@ namespace lc
 	{
 	}
 
-#if __has_include(<concepts>)
+#if __cpp_concepts
 	template <class T>
 	concept lc_polymorphic = std::derived_from<T, Polymorphic>;
 #endif
