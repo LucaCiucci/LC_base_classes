@@ -20,9 +20,20 @@ target_sources(
 		"ScopeGuard.cpp"
 )
 
-# https://github.com/catchorg/Catch2/blob/devel/docs/cmake-integration.md#top
-find_package(Catch2 3 REQUIRED)
-# Note: Catch2WithMain will provide us a default main
-target_link_libraries(unit_test PRIVATE Catch2::Catch2WithMain)
+if (FALSE)
+	# https://github.com/catchorg/Catch2/blob/devel/docs/cmake-integration.md#top
+	find_package(Catch2 3 REQUIRED)
+	# Note: Catch2WithMain will provide us a default main
+	target_link_libraries(unit_test PRIVATE Catch2::Catch2WithMain)
+else()
+	Include(FetchContent)
+	FetchContent_Declare(
+	  Catch2
+	  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+	  GIT_TAG        v3.2.0 # or a later release
+	)
+	FetchContent_MakeAvailable(Catch2)
+	target_link_libraries(unit_test PRIVATE Catch2::Catch2WithMain)
+endif()
 
 add_test(NAME UnitTest COMMAND unit_test)
