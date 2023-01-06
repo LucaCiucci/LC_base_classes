@@ -14,6 +14,7 @@ project(
 	DESCRIPTION "provides soma very basic classes such as `NonCopiable`, `Abstract` etc."
 	LANGUAGES CXX
 )
+message(STATUS "Project: ${PROJECT_NAME} ${PROJECT_VERSION} (${CMAKE_BUILD_TYPE})")
 
 set(LC_base_classes_MAIN_PROJECT FALSE)
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
