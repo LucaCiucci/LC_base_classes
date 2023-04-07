@@ -43,7 +43,7 @@ namespace lc
 		
 	private:
 	};
-	Polymorphic::~Polymorphic() // Explicit destructor call
+	inline Polymorphic::~Polymorphic() // Explicit destructor call
 	{
 	}
 
